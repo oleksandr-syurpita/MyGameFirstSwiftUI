@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @State var  value : Double = 0.0
+    @State private var alertIsVisle: Bool = false
+    @State private var ButtonIsVisle: Bool = false
+    
     var body: some View {
         ZStack {
             VStack {
@@ -19,7 +22,7 @@ struct ContentView: View {
                     .lineSpacing(10)
                     .font(.footnote)
                     .padding()
-                Text("89")
+                Text(String(self.value))
                     .font(.system(size: 36, weight: .bold))
                     .kerning(-1.0)
                     .font(.largeTitle)
@@ -31,9 +34,19 @@ struct ContentView: View {
                     Text("100")
                 }
                 .font(.system(size: 14, weight: .bold))
-                Button(action: {}) {
+                Button(action: {
+                    print("Hello word")
+                    self.alertIsVisle = true
+                    
+                }) {
                     Text("click me")
                 }
+                .alert(isPresented: $alertIsVisle, content: {
+                    let rowvalue: Int = Int(self.value)
+                    return Alert(title: Text("Hello there! \(self.value)"), message: Text("This is my first po \(rowvalue)"), dismissButton: .default(Text("Awesome")))
+                })
+                
+                
             }
         }
     }
@@ -43,7 +56,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .previewInterfaceOrientation(.portraitUpsideDown)
-
+        
         ContentView()
             .previewLayout(.fixed(width: 500, height: 320))
     }
