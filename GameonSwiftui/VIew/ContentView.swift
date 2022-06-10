@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var  value : Double = 0.0
-    @State private var alertIsVisle: Bool = false
-    @State private var ButtonIsVisle: Bool = false
-    @State private var game: Game = Game( )
+    @State var  value = 0.0
+    @State private var alertIsVisle = false
+    @State private var ButtonIsVisle = false
+    @State private var game = Game()
     
     var body: some View {
         ZStack {
@@ -23,7 +23,7 @@ struct ContentView: View {
                     .lineSpacing(10)
                     .font(.footnote)
                     .padding()
-                Text(String(game.target))
+                Text(String(Int(game.target)))
                     .font(.system(size: 36, weight: .bold))
                     .kerning(-1.0)
                     .font(.largeTitle)
@@ -37,14 +37,14 @@ struct ContentView: View {
                 .font(.system(size: 14, weight: .bold))
                 Button(action: {
                     print("Hello word")
-                    self.alertIsVisle = true
+                    alertIsVisle = true
                     
                 }) {
                     Text("click me")
                 }
                 .alert(isPresented: $alertIsVisle, content: {
-                    let rowvalue: Int = Int(self.value)
-                    return Alert(title: Text("Hello there! \(self.value)"), message: Text("This is my first po \(rowvalue).\n" + "Your score \(self.game.points(sldierValue: Int(value)))"), dismissButton: .default(Text("Awesome")))
+                    let rowvalue = Int(value)
+                    return Alert(title: Text("Hello there! \(Int(value))"), message: Text("This is my first po \(rowvalue).\n" + "Your score \(game.points(sldierValue: Int(value)))"), dismissButton: .default(Text("Awesome")))
                 })
                 
                 
